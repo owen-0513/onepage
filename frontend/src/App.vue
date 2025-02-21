@@ -4,13 +4,13 @@
     <section class="hero text-white text-center d-flex align-items-center">
       <div class="container">
         <h1 class="display-3 fw-bold">{{ title }}</h1>
-        <p class="lead">{{ subtitle }}</p>
-        <a href="#about" class="btn btn-outline-light btn-lg mt-3">了解更多</a>
+        <p class="lead" v-html="subtitle"></p>
+        <!-- <a href="#about" class="btn btn-outline-light btn-lg mt-3">了解更多</a> -->
       </div>
     </section>
 
     <!-- 關於我們 -->
-    <section id="about" class="py-5">
+    <!-- <section id="about" class="py-5">
       <div class="container">
         <h2 class="text-center fw-bold mb-4">關於我們</h2>
         <div class="row align-items-center">
@@ -27,12 +27,12 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- 服務項目 -->
     <section id="services" class="py-5 bg-light">
       <div class="container">
-        <h2 class="text-center fw-bold mb-4">我們的服務</h2>
+        <h2 class="text-center fw-bold mb-4">服務項目</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div v-for="service in services" :key="service" class="col">
             <div class="card h-100 shadow-sm border-0">
@@ -49,15 +49,24 @@
     <section id="contact" class="contact py-5 text-white bg-dark">
       <div class="container text-center">
         <h2 class="fw-bold mb-4">聯絡我們</h2>
-        <p class="mb-1"><i class="bi bi-envelope-fill"></i> 信箱：{{ contact.email }}</p>
-        <p class="mb-1"><i class="bi bi-telephone-fill"></i> 電話：{{ contact.phone }}</p>
-        <p class="mb-1"><i class="bi bi-person-fill"></i> 名字：{{ contact.name }}</p>
+        <p class="mb-1">
+          <i class="bi bi-envelope-fill"></i> 信箱：{{ contact.email }}
+        </p>
+        <p class="mb-1">
+          <i class="bi bi-telephone-fill"></i> 聯絡電話：{{ contact.phone }}
+        </p>
+        <p class="mb-1">
+          <i class="bi bi-telephone-fill"></i> 聯絡地址：{{ contact.address }}
+        </p>
+        <p class="mb-1">
+          <i class="bi bi-person-fill"></i> 名字：{{ contact.name }}
+        </p>
       </div>
     </section>
 
     <!-- 放大圖片 -->
     <div v-if="isImageOpen" class="overlay" @click="closeImage">
-      <img :src="aboutImage" class="large-img">
+      <img :src="aboutImage" class="large-img" />
     </div>
   </div>
 </template>
@@ -66,15 +75,26 @@
 export default {
   data() {
     return {
-      title: "一頁式網站",
-      subtitle: "提供優質棒棒的方案",
-      aboutText: "我們專注於技術創新，致力於提供高品質的解決方案，幫助企業數位轉型。",
-      aboutImage: new URL('@/assets/page1.PNG', import.meta.url).href,
-      services: ["網站開發", "JAVA超級大神", "DB管控專家"],
+      title: "公司介紹",
+      subtitle:
+        "我們成立於2023,主營項目為電子料的排單&現貨銷售(電子料包含主動IC/被動元件/連接器/感測器/模組...等等)<br>" +
+        "我們提供的產品適用於各種產業應用領域。<br>" +
+        "例如IC測試廠、SMT廠、通訊、電腦、消費電子、醫療、工控、穿戴装置、AI等等。",
+      aboutText:
+        "我們專注於技術創新，致力於提供高品質的解決方案，幫助企業數位轉型。",
+      aboutImage: new URL("@/assets/page1.PNG", import.meta.url).href,
+      services: [
+        "全球電子料採購供應鏈與銷售服務(主動IC/被動元件/連接器/感測器/模組..)",
+        "提供急單/散料/現貨/排單需求",
+        "為專案批量試產的客户備齊BOM上電子料",
+        "提供客户BOM表優化方案(協尋停產料/替代料)",
+        "代銷呆滞存(貨源:代理商/終端客户)",
+      ],
       contact: {
         email: "XXXX@example.com",
         phone: "0987-654-321",
-        name: "Owen,Chris"
+        address: "xxx",
+        name: "Owen,Chris",
       },
       isImageOpen: false,
     };
@@ -85,8 +105,8 @@ export default {
     },
     closeImage() {
       this.isImageOpen = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
