@@ -74,7 +74,7 @@ export default {
       contact: {
         email: "XXXX@example.com",
         phone: "0987-654-321",
-        name: "Owen"
+        name: "Owen,Chris"
       },
       isImageOpen: false,
     };
