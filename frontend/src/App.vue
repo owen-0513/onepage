@@ -58,9 +58,9 @@
         <p class="mb-1">
           <i class="bi bi-telephone-fill"></i> 聯絡地址：{{ contact.address }}
         </p>
-        <p class="mb-1">
-          <i class="bi bi-person-fill"></i> 名字：{{ contact.name }}
-        </p>
+        <!-- <p class="mb-1"> -->
+        <!-- <i class="bi bi-person-fill"></i> 名字：{{ contact.name }} -->
+        <!-- </p> -->
       </div>
     </section>
 
@@ -94,6 +94,7 @@ export default {
         email: "XXXX@example.com",
         phone: "0987-654-321",
         address: "xxx",
+        // name: "Owen,Chris",
       },
       isImageOpen: false,
     };
