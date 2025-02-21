@@ -1,0 +1,17 @@
+# Node.js 相關
+node_modules/
+dist/
+package-lock.json
+
+# 環境變數
+.env
+.env.local
+
+# macOS / Windows 系統檔案
+.DS_Store
+Thumbs.db
+
+# 編輯器設定
+.vscode/
+.idea/
+*.log
