@@ -94,7 +94,6 @@ export default {
         email: "XXXX@example.com",
         phone: "0987-654-321",
         address: "xxx",
-        name: "Owen,Chris",
       },
       isImageOpen: false,
     };
