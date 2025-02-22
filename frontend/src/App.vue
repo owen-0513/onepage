@@ -143,7 +143,7 @@ export default {
       contact: {
         email: "XXXX@example.com",
         phone: "0987-654-321",
-        address: "xxx",
+        address: "新竹縣竹北市中崙里光明十街139號1樓",
       },
 
       isCardOpen: false, // 控制放大視窗是否開啟
