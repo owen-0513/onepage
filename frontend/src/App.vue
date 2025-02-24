@@ -283,14 +283,14 @@ export default {
   margin-top: 10px;
 }
 
-/* 回到頂部按鈕 */
+/* 回到頂部按鈕 (圓形 + 美觀設計) */
 .back-to-top {
   position: fixed;
   bottom: 40px;
   right: 20px;
   width: 50px;
   height: 50px;
-  background: rgba(0, 47, 255, 0.8);
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
   border-radius: 50%;
@@ -301,10 +301,27 @@ export default {
   justify-content: center;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 47, 255, 0.8);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
+
+/*懸停時變化 */
 .back-to-top:hover {
-  background: rgba(0, 47, 255, 0.8);
+  background: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+/* 按下時縮小效果 */
+.back-to-top:active {
+  transform: scale(0.95);
+}
+
+/* 手機適應 */
+@media (max-width: 768px) {
+  .back-to-top {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
 }
 
 /* 響應式設計 */
