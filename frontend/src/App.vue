@@ -35,7 +35,40 @@
     </section>
 
     <!-- 產品介紹 -->
+    <!-- 產品介紹 -->
     <section id="products" class="py-5">
+      <div class="container">
+        <h2 class="text-center fw-bold mb-4">產品介紹</h2>
+
+        <!-- 第一張圖片 -->
+        <div class="text-center mb-4">
+          <img
+            src="@/assets/product1.png"
+            alt="Analog & Power Line Cards"
+            class="img-fluid"
+          />
+        </div>
+
+        <!-- 第二張圖片 -->
+        <div class="text-center">
+          <img
+            src="@/assets/product2.png"
+            alt="Highend/Memory Line Cards"
+            class="img-fluid"
+          />
+        </div>
+        <!-- 第三張圖片 -->
+        <div class="text-center">
+          <img
+            src="@/assets/product3.png"
+            alt="Wireless Line Cards"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="products" class="py-5">
       <div class="container">
         <h2 class="text-center fw-bold mb-4">產品介紹</h2>
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -58,12 +91,15 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- 聯絡我們 -->
     <section id="contact" class="contact py-5 text-white bg-dark">
       <div class="container text-center">
         <h2 class="fw-bold mb-4">聯絡我們</h2>
+        <p class="mb-1">
+          <i class="bi bi-envelope-fill"></i> 公司名稱：{{ contact.name }}
+        </p>
         <p class="mb-1">
           <i class="bi bi-envelope-fill"></i> 信箱：{{ contact.email }}
         </p>
@@ -141,6 +177,7 @@ export default {
 
       // 聯絡方式
       contact: {
+        name: "宏家科技有限公司",
         email: "XXXX@example.com",
         phone: "0987-654-321",
         address: "新竹縣竹北市中崙里光明十街139號1樓",
@@ -167,7 +204,7 @@ export default {
 <style>
 /* HERO 區塊 */
 .hero {
-  background: linear-gradient(135deg, #42b983, #2a7f5f);
+  background: linear-gradient(135deg, #ffffff, #000000);
   min-height: 400px;
   display: flex;
   justify-content: center;
