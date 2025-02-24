@@ -35,7 +35,6 @@
     </section>
 
     <!-- 產品介紹 -->
-    <!-- 產品介紹 -->
     <section id="products" class="py-5">
       <div class="container">
         <h2 class="text-center fw-bold mb-4">產品介紹</h2>
@@ -160,20 +159,20 @@ export default {
       ],
 
       // 產品介紹
-      products: [
-        {
-          name: "電子元件1",
-          image: new URL("@/assets/product1.png", import.meta.url).href,
-        },
-        {
-          name: "電子元件2",
-          image: new URL("@/assets/product2.png", import.meta.url).href,
-        },
-        {
-          name: "電子元件3",
-          image: new URL("@/assets/product3.png", import.meta.url).href,
-        },
-      ],
+      // products: [
+      //   {
+      //     name: "電子元件1",
+      //     image: new URL("@/assets/product1.png", import.meta.url).href,
+      //   },
+      //   {
+      //     name: "電子元件2",
+      //     image: new URL("@/assets/product2.png", import.meta.url).href,
+      //   },
+      //   {
+      //     name: "電子元件3",
+      //     image: new URL("@/assets/product3.png", import.meta.url).href,
+      //   },
+      // ],
 
       // 聯絡方式
       contact: {
