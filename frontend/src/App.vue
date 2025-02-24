@@ -56,7 +56,6 @@
             class="img-fluid"
           />
         </div>
-
         <!-- 第三張圖片 -->
         <div class="text-center">
           <img
@@ -66,25 +65,10 @@
           />
         </div>
       </div>
-    </section>
-
-    <!-- 聯絡我們 -->
-    <section id="contact" class="contact py-5 text-white bg-dark">
-      <div class="container text-center">
-        <h2 class="fw-bold mb-4">聯絡我們</h2>
-        <p class="mb-1">
-          <i class="bi bi-envelope-fill"></i> 公司名稱：{{ contact.name }}
-        </p>
-        <p class="mb-1">
-          <i class="bi bi-envelope-fill"></i> 信箱：{{ contact.email }}
-        </p>
-        <p class="mb-1">
-          <i class="bi bi-telephone-fill"></i> 聯絡電話：{{ contact.phone }}
-        </p>
-        <p class="mb-1">
-          <i class="bi bi-geo-alt-fill"></i> 地址：{{ contact.address }}
-        </p>
-      </div>
+      <!-- 回到頂部按鈕 -->
+      <button v-if="showBackToTop" @click="scrollToTop" class="back-to-top">
+        ↑
+      </button>
     </section>
 
     <!-- <section id="products" class="py-5">
@@ -112,6 +96,25 @@
       </div>
     </section> -->
 
+    <!-- 聯絡我們 -->
+    <section id="contact" class="contact py-5 text-white bg-dark">
+      <div class="container text-center">
+        <h2 class="fw-bold mb-4">聯絡我們</h2>
+        <p class="mb-1">
+          <i class="bi bi-envelope-fill"></i> 公司名稱：{{ contact.name }}
+        </p>
+        <p class="mb-1">
+          <i class="bi bi-envelope-fill"></i> 信箱：{{ contact.email }}
+        </p>
+        <p class="mb-1">
+          <i class="bi bi-telephone-fill"></i> 聯絡電話：{{ contact.phone }}
+        </p>
+        <p class="mb-1">
+          <i class="bi bi-geo-alt-fill"></i> 地址：{{ contact.address }}
+        </p>
+      </div>
+    </section>
+
     <!-- 放大卡片視窗 -->
     <div v-if="isCardOpen" class="overlay" @click="closeCard">
       <div class="expanded-card">
@@ -121,10 +124,6 @@
         </h5>
       </div>
     </div>
-    <!-- 回到頂部按鈕 -->
-    <button v-if="showBackToTop" @click="scrollToTop" class="back-to-top">
-      ↑
-    </button>
   </div>
 </template>
 
@@ -137,8 +136,7 @@ export default {
         "我們成立於2023,主營項目為電子料的排單&現貨銷售(電子料包含主動IC/被動元件/連接器/感測器/模組...等等)<br>" +
         "我們提供的產品適用於各種產業應用領域。<br>" +
         "例如IC測試廠、SMT廠、通訊、電腦、消費電子、醫療、工控、穿戴裝置、AI等等。",
-      showBackToTop: false, // 控制回到頂部按鈕的顯示
-
+      showBackToTop: false,
       // 服務項目
       services: [
         {
@@ -153,6 +151,14 @@ export default {
         {
           title: "為專案批量試產的客户備齊BOM上電子料",
           image: new URL("@/assets/service3.png", import.meta.url).href,
+        },
+        {
+          title: "提供客戶BOM表優化方案(協尋停產料/替代料)",
+          image: new URL("@/assets/service4.png", import.meta.url).href,
+        },
+        {
+          title: "代銷呆滯庫存(貨源:代理商/終端客戶)",
+          image: new URL("@/assets/service5.png", import.meta.url).href,
         },
       ],
 
@@ -184,30 +190,26 @@ export default {
       selectedCard: {}, // 被選中的卡片數據
     };
   },
+  methods: {
+    openCard(item) {
+      this.selectedCard = item;
+      this.isCardOpen = true;
+    },
+    closeCard() {
+      this.isCardOpen = false;
+    },
+    handleScroll() {
+      this.showBackToTop = window.scrollY > 300;
+    },
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+  },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
-  },
-  methods: {
-    // 監聽滾動，決定是否顯示按鈕
-    handleScroll() {
-      this.showBackToTop = window.scrollY > 300;
-    },
-    // 滾動回到頁面頂部
-    scrollToTop() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    },
-    // 點擊卡片時，打開放大視窗
-    openCard(item) {
-      this.selectedCard = item;
-      this.isCardOpen = true;
-    },
-    // 點擊背景時，關閉放大視窗
-    closeCard() {
-      this.isCardOpen = false;
-    },
   },
 };
 </script>
@@ -222,14 +224,73 @@ export default {
   align-items: center;
 }
 
-/* 回到頂部按鈕 (圓形 + 美觀設計) */
+/* 服務 & 產品卡片 */
+.card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 2px 2px 10px rgba(253, 251, 251, 0.2);
+}
+
+/* 圖片樣式 */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.card-img-top {
+  max-height: 120px;
+  object-fit: contain;
+  width: 100%;
+  padding: 5px;
+}
+
+/* 放大視窗 */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  cursor: pointer;
+}
+.expanded-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+.expanded-card img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.expanded-title {
+  font-size: 1.5em;
+  margin-top: 10px;
+}
+
+/* 回到頂部按鈕 */
 .back-to-top {
   position: fixed;
   bottom: 40px;
   right: 20px;
   width: 50px;
   height: 50px;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 47, 255, 0.8);
   color: white;
   border: none;
   border-radius: 50%;
@@ -240,27 +301,10 @@ export default {
   justify-content: center;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 47, 255, 0.8);
 }
-
-/* 懸停時變化 */
 .back-to-top:hover {
-  background: rgba(0, 0, 0, 0.8);
-  transform: scale(1.1);
-}
-
-/* 按下時縮小效果 */
-.back-to-top:active {
-  transform: scale(0.95);
-}
-
-/* 手機適應 */
-@media (max-width: 768px) {
-  .back-to-top {
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
-  }
+  background: rgba(0, 47, 255, 0.8);
 }
 
 /* 響應式設計 */
