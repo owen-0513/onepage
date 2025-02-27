@@ -1,5 +1,53 @@
 <template>
   <div id="app">
+    <!-- 導覽列 -->
+    <nav
+      class="navbar navbar-expand-lg fixed-top"
+      :class="{ 'navbar-scrolled': isScrolled }"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="#">宏家科技</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="切換導航"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                @click.prevent="scrollToSection('services')"
+                >服務項目</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                @click.prevent="scrollToSection('products')"
+                >產品介紹</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                @click.prevent="scrollToSection('contact')"
+                >聯絡我們</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <!-- 頂部 Hero 區塊 -->
     <section class="hero text-white text-center d-flex align-items-center">
       <div class="container">
@@ -97,7 +145,7 @@
     </section> -->
 
     <!-- 聯絡我們 -->
-    <section id="contact" class="contact py-5 text-white bg-dark">
+    <!-- <section id="contact" class="contact py-5 text-white bg-dark">
       <div class="container text-center">
         <h2 class="fw-bold mb-4">聯絡我們</h2>
         <p class="mb-1">
@@ -112,6 +160,43 @@
         <p class="mb-1">
           <i class="bi bi-geo-alt-fill"></i> 地址：{{ contact.address }}
         </p>
+      </div>
+    </section> -->
+
+    <!-- 聯絡我們 -->
+    <section id="contact" class="contact py-5 text-white bg-dark">
+      <div
+        class="container d-flex flex-column flex-md-row align-items-center justify-content-between"
+      >
+        <!-- 左側：聯絡資訊 -->
+        <div class="contact-info text-center text-md-start">
+          <h2 class="fw-bold mb-4">聯絡我們</h2>
+          <p class="mb-1">
+            <i class="bi bi-building"></i> 公司名稱：{{ contact.name }}
+          </p>
+          <p class="mb-1">
+            <i class="bi bi-envelope-fill"></i> 信箱：{{ contact.email }}
+          </p>
+          <p class="mb-1">
+            <i class="bi bi-telephone-fill"></i> 聯絡電話：{{ contact.phone }}
+          </p>
+          <p class="mb-1">
+            <i class="bi bi-geo-alt-fill"></i> 地址：{{ contact.address }}
+          </p>
+        </div>
+
+        <!-- 右側：Google 地圖 -->
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14484.795461175385!2d121.0054238215072!3d24.822871947259348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3468368cf667477d%3A0x5b2e89b4389846a4!2z5Lit5bSZ6YeM!5e0!3m2!1szh-TW!2stw&dirflg=d"
+            width="100%"
+            height="300"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
     </section>
 
@@ -204,6 +289,12 @@ export default {
     scrollToTop() {
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
+    scrollToSection: (sectionId) => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -215,13 +306,20 @@ export default {
 </script>
 
 <style>
-/* HERO 區塊 */
+@import url("https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap");
+/* Top 區塊 */
 .hero {
   background: linear-gradient(135deg, #ffffff, #000000);
-  min-height: 400px;
+  min-height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+/* Top 字體*/
+.hero h1 {
+  background: linear-gradient(135deg, #0072bc 50%, #000 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* 服務 & 產品卡片 */
@@ -231,6 +329,7 @@ export default {
   overflow: hidden;
   cursor: pointer;
 }
+/*Card back*/
 .card:hover {
   transform: scale(1.05);
   box-shadow: 2px 2px 10px rgba(253, 251, 251, 0.2);
@@ -330,5 +429,65 @@ export default {
     flex: 0 0 100%;
     max-width: 100%;
   }
+}
+
+/* Navbar */
+.navbar {
+  transition: all 0.3s ease-in-out;
+  background: transparent;
+}
+/*navbar text*/
+.navbar-scrolled {
+  background: rgba(0, 0, 0, 0.8);
+}
+/*navbar text back*/
+.navbar .nav-link {
+  color: rgb(0, 0, 0); /* 預設文字顏色 */
+  transition: color 0.3s ease-in-out; /* 平滑變化 */
+}
+/*navbar text back*/
+.navbar .nav-link:hover {
+  color: #0072bc; /* 滑鼠移過去變成藍色 */
+}
+
+/* 調整聯絡我們的容器 */
+.contact .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 在桌機上並排顯示 */
+@media (min-width: 768px) {
+  .contact .container {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .contact-info {
+    flex: 1; /* 左邊的聯絡資訊佔據 50% */
+    padding-right: 20px;
+  }
+
+  .map-container {
+    flex: 1; /* 右邊的地圖佔據 50% */
+    max-width: 500px; /* 限制最大寬度 */
+  }
+}
+
+/* Google Maps 樣式 */
+.map-container {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
 }
 </style>
